@@ -219,15 +219,63 @@ def total_spent()->float:
     return total
 
 def expense_percentages()->float:
-    #pendiente
-    pass
+    percentages = {}
+    total = total_spent()
+    if total == 0:
+        return {item["expense"]: 0 for item in wallet}
+    for details in wallet:
+        percent = (details["price"] / total) * 100
+        percentages[details["expense"]] = percent
+    return percentages
 
 # 9. Pet Adoption Center
-def add_pet(): pass
-def find_by_species(): pass
-def older_than(): pass
+pets:list = []
+def add_pet(name:str="",species:str="",age:int=0)->list:
+    if age > 0:    
+        for pet in pets:
+            if pet["name"].lower() == name.lower():
+                print("The pet was already added.")
+                return pets
+        pets.append({"name":name,"species":species,"age":age})
+        return pets
+    else:
+        print("Age must be positive.")
+
+def find_by_species(species:str="")->list:
+    found:list = []
+    for pet in pets:
+        if pet["species"].lower() == species.lower():
+            found.append(pet)
+    return found
+
+def older_than(age:int=0)->list:
+    older:list = []
+    for pet in pets:
+        if pet["age"] > age:
+            older.append(pet)
+    return older
 
 # 10. Gym Membership System
-def register_member(): pass
-def change_plan(): pass
-def unpaid_members(): pass
+members:list = []
+def register_member(name:str="",plan:str="",status:str="")->list:
+    for member in members:
+        if member["name"].lower() == name.lower():
+            print("The member was already added.")
+            return members
+    members.append({"name":name,"plan":plan,"status":status})
+    return members
+
+def change_plan(member:str="",plan:str="")->None:
+    for member in members:
+        if member["name"].lower() == member.lower():
+            member["plan"] = plan
+            break
+    else:
+        print("The member couldn't be found.")
+
+def unpaid_members()->list:
+    unpaid:list = []
+    for member in members:
+        if member["status"].lower() == "late":
+            unpaid.append(member["name"])
+    return unpaid
