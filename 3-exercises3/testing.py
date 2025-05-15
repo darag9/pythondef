@@ -11,11 +11,7 @@ def test_library():
 # 2. Student Grade Manager
 def test_grades():
     students.clear()
-    print(add_student("Alice"))
-    print(add_student("pepe"))
-    print(add_student("pepe"))
-    add_grade("pepe", 70)
-    add_grade("pepe", 70)
+    add_student("Alice")
     add_grade("Alice", 90)
     add_grade("Alice", 80)
     assert get_average("Alice") == 85.0
@@ -38,7 +34,6 @@ def test_warehouse():
 # 5. Movie Rating System
 def test_movies():
     movies.clear()
-    add_movie("Inception")
     add_movie("Inception")
     rate_movie("Inception", 5)
     rate_movie("Inception", 4)
@@ -64,8 +59,7 @@ def test_wallet():
     add_expense("food", 100)
     add_expense("transport", 50)
     percentages = expense_percentages()
-    print(percentages)
-    assert round(percentages, 1) == 66.7
+    assert round(percentages["food"], 1) == 66.7
 
 # 9. Pet Adoption Center
 def test_pets():
@@ -81,10 +75,17 @@ def test_gym():
     assert "John" in unpaid_members()
 
 def main():
-    # test_grades()
-    # print(get_average("Alice"))
-    # print(get_average("pepe"))
-    # print(students)
     
+    test_library()
+    test_grades()
+    test_menu()
+    test_warehouse()
+    test_movies()
+    test_courses()
+    test_todos()
     test_wallet()
+    test_pets()
+    test_gym()
+    print("All tests passed!")
 main()
+
